@@ -113,3 +113,15 @@ void Repository::addItem(const Item &newItem) {
     items.push_back(newItem);
     save();
 }
+
+void Repository::bid(const Item &item, int userId, const std::string &date, int offeredSum) {
+    for (auto& i:items) {
+        if (i.getName()==item.getName()) {
+            i.setPrice(offeredSum);
+            i.addOffer(userId,date,offeredSum);
+            save();
+            return;
+        }
+    }
+    throw std::runtime_error("item not found");
+}

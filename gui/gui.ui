@@ -60,6 +60,23 @@
    <item>
     <widget class="QListWidget" name="offersListWidget"/>
    </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Enter bidding price:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="bidLineEdit"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="bidButton">
+     <property name="text">
+      <string>Bid</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

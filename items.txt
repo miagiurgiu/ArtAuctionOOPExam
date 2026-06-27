@@ -1,10 +1,10 @@
-Mona Lisa,Painting,1500,2|2026-06-20|1200;4|2026-06-21|1500
+Mona Lisa,Painting,1700,2|2026-06-20|1200;4|2026-06-21|1500;4|2026-06-27|1700
 Sunflowers,Painting,950,4|2026-06-18|900;2|2026-06-19|950
 The Thinker,Sculpture,2200,2|2026-06-15|2100
-Ancient Vase,Ceramics,500,
+Ancient Vase,Ceramics,800,4|2026-06-27|700;4|2026-06-27|800
 Golden Necklace,Jewelry,1300,4|2026-06-22|1300
 Silver Ring,Jewelry,350,
 Landscape,Painting,700,2|2026-06-16|650;4|2026-06-17|700
 Greek Amphora,Ceramics,850,4|2026-06-23|850
-neww,Painting,300,
-heh,Painting,200,
+neww,Painting,300,4|2026-06-27|300
+heh,Painting,300,4|2026-06-27|300

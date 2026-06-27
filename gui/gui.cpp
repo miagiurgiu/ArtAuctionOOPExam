@@ -33,12 +33,14 @@ GUI::~GUI() {
 void GUI::update() {
     //populateList();
     seeItemsInSelectedCategory();
+    //populateOffersList();
 }
 
 void GUI::connectSignalsAndSlots() {
     connect(ui->comboBox,&QComboBox::currentTextChanged,this,&GUI::seeItemsInSelectedCategory);
     connect(ui->addButton,&QPushButton::clicked,this,&GUI::addItem);
     connect(ui->itemsListWidget,&QListWidget::itemSelectionChanged,this,&GUI::populateOffersList);
+    connect(ui->bidButton,&QPushButton::clicked,this,&GUI::bid);
 }
 
 void GUI::populateList() {
@@ -105,5 +107,30 @@ std::vector<Item> GUI::getCurrentDisplayed() {
             result.push_back(i);
     }
     return result;
+}
+
+void GUI::bid() {
+    if (user.getType()!="collector") {
+        QMessageBox::critical(this,"ERROR","only collectors can bid");
+        return;
+    }
+    int price=ui->bidLineEdit->text().toInt();
+    auto selection=ui->itemsListWidget->selectedItems();
+    if (selection.empty())
+        return;
+    int index=ui->itemsListWidget->currentRow();
+    auto items=getCurrentDisplayed();
+    auto item=items[index];
+    if (price<item.getPrice()) {
+        QMessageBox::critical(this,"MESSAGE","offered sum is less than the item's current price");
+        return;
+    }
+    try {
+        service.bid(item,user.getId(),price);
+        ui->bidLineEdit->clear();
+    }
+    catch (const std::exception& e) {
+        QMessageBox::critical(this,"ERROR",e.what());
+    }
 }
 

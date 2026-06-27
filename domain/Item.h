@@ -20,6 +20,9 @@ public:
     int getPrice() const;
     std::vector<std::tuple<int,std::string,int>> getListOfOffers() const;
     std::string toString() const;
+    void setPrice(int newPrice);
+    void addOffer(int userId,const std::string& date,int offeredSum);
+
 };
 
 

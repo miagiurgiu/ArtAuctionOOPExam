@@ -3,7 +3,7 @@
 //
 
 #include "Service.h"
-
+#include <QDate>
 Service::Service(Repository &repo):repo{repo} {
 }
 
@@ -42,4 +42,14 @@ std::vector<std::tuple<int, std::string, int>> Service::getOffersForItemSorted(c
         return std::get<1>(o1)>std::get<1>(o2);
     });
     return offers;
+}
+
+void Service::bid(const Item &item, int userId,int offeredSum) {
+    /*
+    if (offeredSum<item.getPrice())
+        throw std::runtime_error("offered sum less than current price");
+        */
+    std::string date=QDate::currentDate().toString("yyyy-MM-dd").toStdString();
+    repo.bid(item,userId,date,offeredSum);
+    notify();
 }

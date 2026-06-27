@@ -32,6 +32,7 @@ private:
     void addItem();
     void populateOffersList();
     std::vector<Item> getCurrentDisplayed();
+    void bid();
 };
 
 

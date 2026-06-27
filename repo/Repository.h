@@ -24,6 +24,7 @@ public:
     void loadItems();
     void save();
     void addItem(const Item& newItem);
+    void bid(const Item& item, int userId, const std::string& date, int offeredSum);
 };
 
 
