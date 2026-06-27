@@ -28,6 +28,7 @@ private:
     User user;
     void connectSignalsAndSlots();
     void populateList();
+    void seeItemsInSelectedCategory();
 
 };
 

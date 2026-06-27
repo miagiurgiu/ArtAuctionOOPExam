@@ -17,6 +17,9 @@
    <item>
     <widget class="QListWidget" name="itemsListWidget"/>
    </item>
+   <item>
+    <widget class="QComboBox" name="comboBox"/>
+   </item>
   </layout>
  </widget>
  <resources/>
