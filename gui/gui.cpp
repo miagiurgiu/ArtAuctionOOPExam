@@ -38,6 +38,7 @@ void GUI::update() {
 void GUI::connectSignalsAndSlots() {
     connect(ui->comboBox,&QComboBox::currentTextChanged,this,&GUI::seeItemsInSelectedCategory);
     connect(ui->addButton,&QPushButton::clicked,this,&GUI::addItem);
+    connect(ui->itemsListWidget,&QListWidget::itemSelectionChanged,this,&GUI::populateOffersList);
 }
 
 void GUI::populateList() {
@@ -50,12 +51,11 @@ void GUI::populateList() {
 
 void GUI::seeItemsInSelectedCategory() {
     ui->itemsListWidget->clear();
-    QString category=ui->comboBox->currentText();
-    auto items=service.getItemsSorted();
+    ui->offersListWidget->clear();
+    //QString category=ui->comboBox->currentText();
+    auto items=getCurrentDisplayed();
     for (const auto&i:items) {
-        if (category=="All" || QString::fromStdString(i.getCategory())==category){
-            ui->itemsListWidget->addItem(QString::fromStdString(i.toString()));
-        }
+        ui->itemsListWidget->addItem(QString::fromStdString(i.toString()));
     }
 }
 
@@ -77,5 +77,33 @@ void GUI::addItem() {
     catch (const std::exception& e) {
         QMessageBox::critical(this,"ERROR",e.what());
     }
+}
+
+void GUI::populateOffersList() {
+    ui->offersListWidget->clear();
+    auto selection=ui->itemsListWidget->selectedItems();
+    if (selection.empty())
+        return;
+    int index=ui->itemsListWidget->currentRow();
+    auto items=getCurrentDisplayed();
+    auto item=items[index];
+    auto offers=service.getOffersForItemSorted(item);
+    for (const auto& o:offers) {
+        std::string text=std::to_string(std::get<0>(o))+","+
+            std::get<1>(o)+","+
+                std::to_string(std::get<2>(o));
+        ui->offersListWidget->addItem(QString::fromStdString(text));
+    }
+}
+
+std::vector<Item> GUI::getCurrentDisplayed() {
+    std::vector<Item> result;
+    QString category=ui->comboBox->currentText();
+    auto items=service.getItemsSorted();
+    for (const auto&i:items) {
+        if (category=="All" || QString::fromStdString(i.getCategory())==category)
+            result.push_back(i);
+    }
+    return result;
 }
 

@@ -33,3 +33,13 @@ void Service::addItem(const std::string &name, const std::string &category, int 
     repo.addItem(newItem);
     notify();
 }
+
+
+
+std::vector<std::tuple<int, std::string, int>> Service::getOffersForItemSorted(const Item &item) const {
+    auto offers=item.getListOfOffers();
+    std::sort(offers.begin(),offers.end(),[](const auto& o1,const auto& o2) {
+        return std::get<1>(o1)>std::get<1>(o2);
+    });
+    return offers;
+}

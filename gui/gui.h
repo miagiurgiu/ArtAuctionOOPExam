@@ -30,6 +30,8 @@ private:
     void populateList();
     void seeItemsInSelectedCategory();
     void addItem();
+    void populateOffersList();
+    std::vector<Item> getCurrentDisplayed();
 };
 
 
