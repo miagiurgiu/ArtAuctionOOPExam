@@ -108,3 +108,8 @@ void Repository::save() {
     }
     fout.close();
 }
+
+void Repository::addItem(const Item &newItem) {
+    items.push_back(newItem);
+    save();
+}

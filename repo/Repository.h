@@ -23,6 +23,7 @@ public:
     void loadUsers();
     void loadItems();
     void save();
+    void addItem(const Item& newItem);
 };
 
 

@@ -22,3 +22,14 @@ std::vector<Item> Service::getItemsSorted() const {
     });
     return items;
 }
+
+void Service::addItem(const std::string &name, const std::string &category, int price,
+    const std::vector<std::tuple<int, std::string, int>> &offers) {
+    if (name.empty())
+        throw std::runtime_error("empty name");
+    if (price<=0)
+        throw std::runtime_error("invalid price");
+    Item newItem{name,category,price,offers};
+    repo.addItem(newItem);
+    notify();
+}

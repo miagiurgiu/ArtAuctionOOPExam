@@ -7,6 +7,7 @@
 #include "gui.h"
 #include "ui_GUI.h"
 #include <QComboBox>
+#include <QMessageBox>
 
 GUI::GUI(Service& service,const User& user,QWidget *parent) :
     QWidget(parent), ui(new Ui::GUI),service{service},user{user} {
@@ -36,7 +37,7 @@ void GUI::update() {
 
 void GUI::connectSignalsAndSlots() {
     connect(ui->comboBox,&QComboBox::currentTextChanged,this,&GUI::seeItemsInSelectedCategory);
-
+    connect(ui->addButton,&QPushButton::clicked,this,&GUI::addItem);
 }
 
 void GUI::populateList() {
@@ -55,6 +56,26 @@ void GUI::seeItemsInSelectedCategory() {
         if (category=="All" || QString::fromStdString(i.getCategory())==category){
             ui->itemsListWidget->addItem(QString::fromStdString(i.toString()));
         }
+    }
+}
+
+void GUI::addItem() {
+    if (user.getType()!="administrator") {
+        QMessageBox::critical(this,"ERROR","only administrators can add");
+        return;
+    }
+    std::string name=ui->nameLineEdit->text().toStdString();
+    std::string category=ui->categoryLineEdit->text().toStdString();
+    int price=ui->priceLineEdit->text().toInt();
+    std::vector<std::tuple<int,std::string,int>> offers;
+    try {
+        service.addItem(name,category,price,offers);
+        ui->nameLineEdit->clear();
+        ui->categoryLineEdit->clear();
+        ui->priceLineEdit->clear();
+    }
+    catch (const std::exception& e) {
+        QMessageBox::critical(this,"ERROR",e.what());
     }
 }
 

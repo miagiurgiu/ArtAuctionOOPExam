@@ -16,6 +16,7 @@ public:
     std::vector<Item> getItems() const;
     std::vector<User> getUsers() const;
     std::vector<Item> getItemsSorted() const;
+    void addItem(const std::string& name,const std::string& category,int price,const std::vector<std::tuple<int,std::string,int>>& offers);
 };
 
 

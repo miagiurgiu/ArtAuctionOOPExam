@@ -29,7 +29,7 @@ private:
     void connectSignalsAndSlots();
     void populateList();
     void seeItemsInSelectedCategory();
-
+    void addItem();
 };
 
 

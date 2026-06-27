@@ -6,3 +6,5 @@ Golden Necklace,Jewelry,1300,4|2026-06-22|1300
 Silver Ring,Jewelry,350,
 Landscape,Painting,700,2|2026-06-16|650;4|2026-06-17|700
 Greek Amphora,Ceramics,850,4|2026-06-23|850
+neww,Painting,300,
+heh,Painting,200,
