@@ -1,0 +1,4 @@
+Mia,2,collector
+Max,1,administrator
+Ana,3,administrator
+Ion,4,collector
